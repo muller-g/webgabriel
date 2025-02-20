@@ -1,0 +1,46 @@
+.input_image {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.input_image_label {
+    cursor: pointer;
+    background-color: var(--green-ck);
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.input_image_input {
+    display: none;
+}
+
+.show_images {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.image_prev {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image_prev img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.image_prev span {
+    font-size: 12px;
+}

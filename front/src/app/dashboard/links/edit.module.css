@@ -1,0 +1,103 @@
+.file_wrapp {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.file_wrapp label {
+    display: flex;
+}
+
+.file_wrapp label input {
+    display: none;
+}
+
+.file_wrapp label span {
+    cursor: pointer;
+    color: #fff;
+    background-color: #b900ff;
+    transition: .3s;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.file_wrapp label span:hover {
+    background-color: #953ab6;
+    transition: .3s;
+}
+
+.file_wrapp .image_preview {
+    display: flex;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.wrapp {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.wrapp span {
+    color: #fff;
+}
+
+.wrapp button:hover {
+    background-color: #953ab6;
+    transition: .3s;
+}
+
+.input_wrapp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input_wrapp input {
+    color: #fff;
+}
+
+#wrapp_icon {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: start;
+    width: 100%;
+}
+
+#wrapp_icon button {
+    margin-left: auto;
+}
+
+#wrapp_icon button:hover {
+    background-color: #953ab6;
+    transition: .3s;
+}
+
+#wrapp_icon  .image_preview {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 0;
+}
+
+#wrapp_icon label {
+    white-space: nowrap;
+}
+
+.wrapp_inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.wrapp_inputs input {
+    color: #fff;
+}

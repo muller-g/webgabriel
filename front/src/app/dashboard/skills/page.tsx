@@ -1,0 +1,17 @@
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import SkillsEdit from "./edit";
+
+export default async function Skills() {
+  const session = await getServerSession();
+
+  if(!session){
+    redirect("/")
+  }
+
+  return (
+    <main>
+      <SkillsEdit />
+    </main>
+  );
+}
