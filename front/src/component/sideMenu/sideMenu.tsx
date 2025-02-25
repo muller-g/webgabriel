@@ -1,5 +1,7 @@
 'use client'
 
+import useApi from '@/app/api/hook/axiosRequest';
+import { signOut } from "next-auth/react";
 import {
   Avatar,
   Box,
@@ -26,12 +28,9 @@ import { IconType } from 'react-icons';
 import {
   FiBell,
   FiChevronDown,
+  FiEdit,
   FiHome,
-  FiMenu,
-  FiShoppingBag,
-  FiShoppingCart,
-  FiTrendingUp,
-  FiEdit
+  FiMenu
 } from 'react-icons/fi';
 
 interface LinkItemProps {
@@ -125,6 +124,12 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 }
 
 const MobileNav = ({session}: any, { onOpen, ...rest }: MobileProps) => {
+
+  async function logout(){
+    await useApi.axiosRequestAuth('POST', '/auth/logout', {}, session.user.accessToken)
+    .then((res) => signOut())
+  } 
+  
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -194,7 +199,9 @@ const MobileNav = ({session}: any, { onOpen, ...rest }: MobileProps) => {
               <MenuItem _hover={{
                   bg: '#953ab6',
                   color: 'white',
-                }} backgroundColor={'#030018'} color={'#fff'}>Sair</MenuItem>
+                }} backgroundColor={'#030018'} color={'#fff'}
+                onClick={logout}
+                >Sair</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
