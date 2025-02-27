@@ -1,0 +1,31 @@
+.my_link_button {
+    width: 100%;
+    background-color: white;
+    color: black;
+    display: flex;
+    text-align: center;
+    position: relative;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 7px 12px 0px 0px rgba(0, 0, 0, 1);
+    transition: 0.3s;
+}
+
+.my_link_button .img_btn {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 9999px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+}
+
+.my_link_button:hover {
+    transition: 0.3s;
+    background-color: #dbdbdb;
+}

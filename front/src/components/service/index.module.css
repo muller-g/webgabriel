@@ -1,0 +1,53 @@
+.service {
+    transition: 0.3s;
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    height: 90px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    box-shadow: 7px 12px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.service_img svg {
+    font-size: 32px;
+}
+
+.service_content h1 {
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.service:hover {
+    transition: 0.3s;
+    background-color: white;
+}
+
+.service:hover h1,
+.service:hover p,
+.service:hover svg {
+    transition: 0.3s;
+    color: black;
+}
+
+@media (max-width: 485px) {
+    .service {
+        height: 100px;
+    }
+}
+
+@media (max-width: 396px) {
+    .service {
+        height: 120px;
+    }
+}
+
+@media (max-width: 342px) {
+    .service {
+        height: 140px;
+    }
+}

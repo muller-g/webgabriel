@@ -3,14 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const geistSans = localFont({
-  src: "./_fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./_fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
+const interSans = localFont({
+  src: "../_fonts/Inter-Medium.ttf",
+  variable: "--font-inter-sans",
   weight: "100 900",
 });
 
@@ -26,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${interSans.variable} ${interSans.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

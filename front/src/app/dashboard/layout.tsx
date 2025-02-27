@@ -1,4 +1,4 @@
-import SidebarWithHeader from "@/component/sideMenu/sideMenu";
+import SidebarWithHeader from "@/components/sideMenu/sideMenu";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from '../api/auth/[...nextauth]/route';

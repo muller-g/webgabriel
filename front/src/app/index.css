@@ -1,4 +1,4 @@
-.my_links {
+.my-links {
     background: rgb(17, 20, 24);
     background: linear-gradient(180deg, rgba(17, 20, 24, 1) 7%, rgba(173, 0, 255, 1) 100%);
     width: 100%;
@@ -8,27 +8,26 @@
     height: 100vh;
 }
 
-.my_links .my_links_container {
+.my-links .my-links-container {
     max-width: 500px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 40px;
 }
 
-.my_links .my_links_container .fixed_section {
+.my-links .my-links-container .fixed-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-top: 40px;
-    margin-bottom: 20px;
 }
 
-.title_img {
+.title-img {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,7 +37,7 @@
     margin-bottom: 12px;
 }
 
-.instagram_title {
+.instagram-title {
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 4px;
@@ -49,15 +48,14 @@
     max-width: 300px;
     font-size: 1.1rem;
     text-align: center;
-    color: #fff;
 }
 
-.content_tab {
+.content-tab {
     display: flex;
     width: 100%;
 }
 
-.redirect_links {
+.redirect-links {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -65,11 +63,11 @@
     margin-top: 15px;
 }
 
-.tab_selector {
+.tab-selector {
     display: flex;
     width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .technology {
@@ -81,51 +79,17 @@
     font-size: 1rem;
     margin-bottom: 12px;
     width: 100%;
-    color: #fff;
 }
 
-.tec_list {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-    row-gap: 20px;
-}
-
-.tab_list {
-    width: 300px;
-    margin-top: 40px;
+.tec-list {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     margin-bottom: 12px;
-    color: #fff;
-    justify-content: space-evenly;
-}
-
-.tab_info {
-    text-decoration: underline;
-    text-underline-offset: 10px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.selected_tab {
-    text-decoration: underline;
-    text-underline-offset: 10px;
-    text-decoration-color: rgb(255, 0, 255);
-    transition: .3s;
-    cursor: pointer;
 }
 
 @media (max-width: 800px) {
-    .my_links .my_links_container {
+    .my-links .my-links-container {
         overflow: auto;
-    }
-}
-
-@media (max-width: 515px) {
-    .content_tab {
-        padding: 0 10px;
     }
 }
