@@ -12,7 +12,7 @@ export default async function Links() {
 
   return (
     <main>
-      <LinksEdit />
+      <LinksEdit session={session}/>
     </main>
   );
 }

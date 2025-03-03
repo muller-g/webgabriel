@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->unsignedBigInteger('file_id')->nullable();
             $table->foreign('file_id')->references('id')->on('files')->onDelete('set null');
+            $table->unsignedBigInteger('developer_info_id')->nullable();
+            $table->foreign('developer_info_id')->references('id')->on('developer_info')->onDelete('set null');
             $table->timestamps();
         });
     }

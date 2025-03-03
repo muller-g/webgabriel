@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->unsignedBigInteger('skills_id')->nullable();
-            $table->foreign('skills_id')->references('id')->on('skills')->onDelete('set null');
+            $table->unsignedBigInteger('group_skills_id')->nullable();
+            $table->foreign('group_skills_id')->references('id')->on('group_skills')->onDelete('set null');
             $table->timestamps();
         });
     }

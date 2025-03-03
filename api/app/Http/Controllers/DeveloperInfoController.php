@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeveloperInfo;
-use App\Models\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use function App\Helpers\uploadFile;
 
 class DeveloperInfoController extends Controller
 {
@@ -21,15 +19,15 @@ class DeveloperInfoController extends Controller
             if($request->hasFile('file')) {
                 $file = $request->file('file');
 
-                $fileId = $this->uploadFile($file);
+                $fileId = uploadFile($file);
             }
 
             if(isset($data['description']) && $data['description']){
-                $developerInfo->description = json_encode($data['description']);
+                $developerInfo->description = $data['description'];
             }
 
             $developerInfo->file_id = $fileId;
-            $developerInfo->save();
+            $developerInfo->update();
 
             return response()->json([ 'message' => 'Informações atualizadas com sucesso!' ]);
         } catch (\Exception $e) {
@@ -37,24 +35,10 @@ class DeveloperInfoController extends Controller
         }
     }
 
-    public function uploadFile($file)
+    public function index()
     {
-        try {
-            $fileRandName = Str::random(10) . '.' . $file->getClientOriginalExtension();
+        $developerInfo = DeveloperInfo::with('file')->where('id', 1)->first();
 
-            $savedFile = File::create([
-                'original_name' => $file->getClientOriginalName(),
-                'name' => $fileRandName,
-                'extension' => $file->getClientOriginalExtension(),
-                'mime_type' => $file->getClientMimeType(),
-                'path' => '',
-            ]);
-
-            Storage::disk('public')->put('files/' . $fileRandName, $file->getContent());
-
-            return $savedFile->id;
-        } catch (\Exception $e) {
-            return response()->json([ 'message' => $e->getMessage() ]);
-        }
+        return response()->json($developerInfo);
     }
 }

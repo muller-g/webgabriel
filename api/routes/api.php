@@ -18,4 +18,8 @@ Route::middleware('auth:sanctum')->group(function(){
 });
 
 Route::get('/', [UserController::class, 'index']);
-Route::post('/upload-file', [DeveloperInfoController::class, 'store']);
+
+Route::prefix('developer')->group(function(){
+    Route::post('/create', [DeveloperInfoController::class, 'store']);
+    Route::get('/', [DeveloperInfoController::class, 'index']);
+});

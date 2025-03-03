@@ -1,14 +1,26 @@
 'use client';
+import useApi from "@/app/api/hook/axiosRequest";
 import { Button, Divider, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./edit.module.css";
 
-export default function LinksEdit() {
+export default function LinksEdit({session}: any) {
     const [image, setImage] = useState<any>(null);
     const [preview, setPreview] = useState<any>('https://placehold.co/200x200');
     const [previewIcon, setPreviewIcon] = useState<any>('https://placehold.co/150x150');
     const [inputs, setInputs] = useState<any>([]);
+    const [descriptions, setDescriptions] = useState<any>([]);
     const [linkBtns, setLinkBtns] = useState<any>([]);
+    const [populatedData, setPopulatedData] = useState<any>(null);
+
+    useEffect(() => {
+        useApi.axiosRequestAuth('GET', '/developer', null, session.user.accessToken).then((res: any) => {
+            setPreview(process.env.NEXT_PUBLIC_API_ROUTE_BACK + res?.response?.data?.file?.path);
+            console.log(res?.response?.data)
+            setInputs(JSON.parse(res?.response?.data?.description));
+            setPopulatedData(res?.response?.data)
+        });
+    }, [])
 
     function handleChangeImage(e: any){
         setImage(e.target.files[0]);
@@ -62,8 +74,28 @@ export default function LinksEdit() {
         });
     }
 
+    function handleChangeInputDescription(e: any, index: number) {
+        const updatedInputs = [...inputs]; // Copiar o estado atual dos inputs
+        updatedInputs[index] = e.target.value;  // Atualizar o valor do input no índice correto
+        setInputs(updatedInputs);  // Atualizar o estado
+    }
+
     function saveBtns() {
         console.log(linkBtns)
+    }
+
+    async function handleSaveDeveloperInfo() {
+        let formData = new FormData();
+
+        if(image){
+            formData.append('file', image);
+        }
+
+        descriptions.map((description: any, index: number) => {
+            formData.append(`description[]`, description);
+        });
+
+        await useApi.axiosRequestAuthFormData('POST', '/developer/create', formData, session.user.accessToken)
     }
 
     return(
@@ -89,11 +121,11 @@ export default function LinksEdit() {
                 <div className={styles.input_wrapp}>
                 {
                     inputs.map((input: any, index: number) => (
-                        <Input type="text" key={index} placeholder="Item" />
+                        <Input type="text" key={index} placeholder="Item" value={input} onChange={(e) => handleChangeInputDescription(e, index)}/>
                     ))
                 }
                 </div>
-                <Button backgroundColor={"#b900ff"} style={{marginTop: '20px'}} color={"#fff"}>Salvar</Button>
+                <Button backgroundColor={"#b900ff"} style={{marginTop: '20px'}} color={"#fff"} onClick={handleSaveDeveloperInfo}>Salvar</Button>
             </div>
             <div className="container">
                 <h1>Links</h1>
