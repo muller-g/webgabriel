@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DeveloperInfo;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Gabriel Müller',
             'email' => 'admin@mail.com',
             'password' => Hash::make('admin123'),
+        ]);
+
+        DeveloperInfo::create([
+            'description' => null,
+            'file_id' => null
         ]);
     }
 }
