@@ -35,6 +35,8 @@
     overflow: hidden;
     border-radius: 50%;
     margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapp {
@@ -100,4 +102,30 @@
 
 .wrapp_inputs input {
     color: #fff;
+}
+
+.wrapp_description {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: max-content;
+}
+
+.remove_input {
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #b900ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.remove_input:hover {
+    background-color: #953ab6;
+    transition: .3s;
 }

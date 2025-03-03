@@ -21,5 +21,6 @@ Route::get('/', [UserController::class, 'index']);
 
 Route::prefix('developer')->group(function(){
     Route::post('/create', [DeveloperInfoController::class, 'store']);
+    Route::post('/create-link', [DeveloperInfoController::class, 'storeLinks']);
     Route::get('/', [DeveloperInfoController::class, 'index']);
 });

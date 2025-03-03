@@ -17,9 +17,11 @@ import styles from "./page.module.css";
 export default function PortfolioEdit({data}: any) {
     const [selectedTab, setSelectedTab] = useState(0);
     const [descriptions, setDescriptions] = useState<any[]>([]);
+    const [links, setLinks] = useState<any[]>([]);
 
     useEffect(() => {
         setDescriptions(JSON.parse(data?.description));
+        setLinks(data?.links);
         console.log(data)
     }, [data]);
 
@@ -44,11 +46,11 @@ export default function PortfolioEdit({data}: any) {
                 {
                     selectedTab === 0 &&
                     <div className={styles.redirect_links}>
-                        <SocialButton text={'Whatsapp'} url={'https://api.whatsapp.com/send?phone=5547997003649&text=Ol%C3%A1%2C%20venho%20atrav%C3%A9s%20do%20site%20%F0%9F%98%80'} icon={wpp} />
-                        <SocialButton text={'Telegram'} url={'https://t.me/muller_dev'} icon={telegram} />
-                        <SocialButton text={'Linkedin'} url={'https://www.linkedin.com/in/muller-g/'} icon={linkedin} />
-                        <SocialButton text={'GitHub'} url={'https://github.com/muller-g'} icon={github} />
-                        <SocialButton text={'Instagram'} url={'https://instagram.com/_muller.dev'} icon={instagram} />
+                        {
+                            links?.map((link: any, index: number) => (
+                                <SocialButton text={link?.title} url={link?.url} icon={link?.file?.path} />
+                            ))
+                        }
                     </div>
                 }
                 {
