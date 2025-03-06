@@ -4,12 +4,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'http',
-                domain: 'localhost',
-                port: 8000
+                hostname: 'localhost',
+                port: '8000'
             },
             {
                 protocol: 'https',
-                domain: 'api.gabrielmullerdev.com.br'
+                hostname: 'api.gabrielmullerdev.com.br'
             }
         ]
     }
