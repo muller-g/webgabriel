@@ -56,7 +56,7 @@ export default function ServicesEdit() {
     }
 
     function saveBtns() {
-        console.log(linkBtns)
+        console.log('HAHAHA logo vai funcionar')
     }
 
     return(

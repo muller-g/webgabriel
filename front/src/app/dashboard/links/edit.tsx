@@ -39,9 +39,8 @@ export default function LinksEdit({session}: any) {
     });
 
     useEffect(() => {
-        useApi.axiosRequestAuth('GET', '/developer', null, session.user.accessToken).then((res: any) => {
+        useApi.axiosRequestAuth('GET', '/developer', null, session?.user?.accessToken).then((res: any) => {
             setPreview(process.env.NEXT_PUBLIC_API_ROUTE_BACK + res?.response?.data?.file?.path);
-            console.log(res?.response?.data)
             setLinkBtns(res?.response?.data?.links);
             setInputs(JSON.parse(res?.response?.data?.description));
             setPopulatedData(res?.response?.data)
@@ -98,10 +97,6 @@ export default function LinksEdit({session}: any) {
         setLinkBtns(updatedInputs);
     }
 
-    useEffect(() => {
-        console.log(linkBtns)
-    }, [linkBtns])
-
     function handleChangeInputDescription(e: any, index: number) {
         const updatedInputs = [...inputs];
         updatedInputs[index] = e.target.value;
@@ -119,7 +114,7 @@ export default function LinksEdit({session}: any) {
             if(link.url) formData.append(`url`, link.url);
             if(link.file) formData.append(`file`, link.file);
             
-            const response: any = await useApi.axiosRequestAuthFormData('POST', '/developer/create-link', formData, session.user.accessToken).catch((err: any) => {console.log(err)})
+            const response: any = await useApi.axiosRequestAuthFormData('POST', '/developer/create-link', formData, session?.user?.accessToken)
             if(response.response.status !== 200){
                 notifyErr();
                 break;
@@ -142,7 +137,7 @@ export default function LinksEdit({session}: any) {
             formData.append(`description[]`, description);
         });
 
-        await useApi.axiosRequestAuthFormData('POST', '/developer/create', formData, session.user.accessToken)
+        await useApi.axiosRequestAuthFormData('POST', '/developer/create', formData, session?.user?.accessToken)
         .then((res: any) => {
             setLoading(false)
             notify();
@@ -179,7 +174,7 @@ export default function LinksEdit({session}: any) {
                 </div>
                 <div className={styles.input_wrapp}>
                 {
-                    inputs.map((input: any, index: number) => (
+                    inputs?.map((input: any, index: number) => (
                         <div className={styles.wrapp_description}>
                             <Input type="text" key={index} placeholder="Item" value={input} onChange={(e) => handleChangeInputDescription(e, index)}/>
                             <div onClick={() => handleRemoveInput(index)} className={styles.remove_input}>
@@ -204,7 +199,7 @@ export default function LinksEdit({session}: any) {
                     <Button backgroundColor={"#b900ff"} color={"#fff"} onClick={() => setLinkBtns([...linkBtns, ''])}>+</Button>
                 </div>
                 {
-                    linkBtns.map((btn: any, index: number) => (
+                    linkBtns?.map((btn: any, index: number) => (
                         <div key={`container-${index}`}>
                             <div className={styles.file_wrapp} id={styles.wrapp_icon}>
                                 <label htmlFor={`fileIcon-${index}`}>

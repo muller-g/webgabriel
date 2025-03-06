@@ -7,11 +7,6 @@ import { FaStoreAlt } from "react-icons/fa";
 import { FaGears } from "react-icons/fa6";
 import { GrConnect, GrVmMaintenance } from "react-icons/gr";
 import { MdDevices, MdWeb } from "react-icons/md";
-import github from "../assets/github.png";
-import instagram from "../assets/instagram.png";
-import linkedin from "../assets/linkedin.png";
-import telegram from "../assets/telegram.png";
-import wpp from "../assets/wpp.jpg";
 import styles from "./page.module.css";
 
 export default function PortfolioEdit({data}: any) {
@@ -22,7 +17,6 @@ export default function PortfolioEdit({data}: any) {
     useEffect(() => {
         setDescriptions(JSON.parse(data?.description));
         setLinks(data?.links);
-        console.log(data)
     }, [data]);
 
     return (

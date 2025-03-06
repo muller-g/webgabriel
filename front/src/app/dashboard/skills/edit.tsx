@@ -56,7 +56,7 @@ export default function SkillsEdit() {
     }
 
     function saveBtns() {
-        console.log(linkBtns)
+        console.log("hahahha logo")
     }
 
     return(
@@ -69,7 +69,7 @@ export default function SkillsEdit() {
                     <Button backgroundColor={"#b900ff"} color={"#fff"} onClick={() => setLinkBtns([...linkBtns, ''])}>+</Button>
                 </div>
                 {
-                    linkBtns.map((btn: any, index: number) => (
+                    linkBtns?.map((btn: any, index: number) => (
                         <div key={`container-${index}`}>
                             <div className={styles.file_wrapp} id={styles.wrapp_icon}>
                                 <label htmlFor={`fileIcon-${index}`}>
