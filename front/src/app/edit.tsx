@@ -23,7 +23,7 @@ export default function PortfolioEdit({data}: any) {
         <main className={styles.my_links} style={selectedTab === 0 ? {height: '100vh'} : {height: 'auto'}}>
            <div className={styles.my_links_container}>
                 <div className={styles.fixed_section}>
-                    <div className={styles.title_img} style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_API_ROUTE_BACK + data?.file?.path}")`}}></div>
+                    <div className={styles.title_img} style={{backgroundImage: `url("https://api.gabrielmullerdev.com.br${data?.file?.path}")`}}></div>
                     <h1 className={styles.instagram_title}>@_muller.dev</h1>
                     {
                         descriptions?.map((description: any, index: number) => (
