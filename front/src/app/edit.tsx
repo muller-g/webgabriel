@@ -18,9 +18,9 @@ export default function PortfolioEdit({data, session}: any) {
 
     useEffect(() => {
         useApi.axiosRequestAuth('GET', '/developer', null, session?.user?.accessToken).then((res: any) => {
-            setDescriptions(JSON.parse(res?.data?.description));
-            setLinks(res?.data?.links);
-            setProfilePhoto(res?.data?.file?.path);
+            setDescriptions(JSON.parse(res?.description));
+            setLinks(res?.links);
+            setProfilePhoto(res?.file?.path);
             console.log(res)
         });
     }, [data, session]);
