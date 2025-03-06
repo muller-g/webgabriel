@@ -9,8 +9,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 export default function LinksEdit({session}: any) {
     const [image, setImage] = useState<any>(null);
     const [preview, setPreview] = useState<any>('https://placehold.co/200x200');
-    const [previewIcon, setPreviewIcon] = useState<any>('https://placehold.co/150x150');
-    const [inputs, setInputs] = useState<any>([]);
+    const [inputs, setInputs] = useState<any[]>([]);
     const [linkBtns, setLinkBtns] = useState<any>([]);
     const [populatedData, setPopulatedData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -42,7 +41,7 @@ export default function LinksEdit({session}: any) {
         useApi.axiosRequestAuth('GET', '/developer', null, session?.user?.accessToken).then((res: any) => {
             setPreview(process.env.NEXT_PUBLIC_API_ROUTE_BACK + res?.response?.data?.file?.path);
             setLinkBtns(res?.response?.data?.links);
-            setInputs(JSON.parse(res?.response?.data?.description));
+            setInputs(res?.response?.data?.description ? JSON.parse(res?.response?.data?.description) : []);
             setPopulatedData(res?.response?.data)
         });
     }, [])
