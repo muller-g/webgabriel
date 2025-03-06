@@ -13,17 +13,19 @@ export default function PortfolioEdit({data}: any) {
     const [selectedTab, setSelectedTab] = useState(0);
     const [descriptions, setDescriptions] = useState<any[]>([]);
     const [links, setLinks] = useState<any[]>([]);
+    const [profilePhoto, setProfilePhoto] = useState<string>('');
 
     useEffect(() => {
         setDescriptions(JSON.parse(data?.description));
         setLinks(data?.links);
+        setProfilePhoto(data?.file?.path);
     }, [data]);
 
     return (
         <main className={styles.my_links} style={selectedTab === 0 ? {height: '100vh'} : {height: 'auto'}}>
            <div className={styles.my_links_container}>
                 <div className={styles.fixed_section}>
-                    <div className={styles.title_img} style={{backgroundImage: `url("https://api.gabrielmullerdev.com.br${data?.file?.path}")`}}></div>
+                    <div className={styles.title_img} style={{backgroundImage: `url("https://api.gabrielmullerdev.com.br${profilePhoto}")`}}></div>
                     <h1 className={styles.instagram_title}>@_muller.dev</h1>
                     {
                         descriptions?.map((description: any, index: number) => (
