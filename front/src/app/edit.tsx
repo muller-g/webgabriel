@@ -8,18 +8,23 @@ import { FaGears } from "react-icons/fa6";
 import { GrConnect, GrVmMaintenance } from "react-icons/gr";
 import { MdDevices, MdWeb } from "react-icons/md";
 import styles from "./page.module.css";
+import useApi from "./api/hook/axiosRequest";
 
-export default function PortfolioEdit({data}: any) {
+export default function PortfolioEdit({data, session}: any) {
     const [selectedTab, setSelectedTab] = useState(0);
     const [descriptions, setDescriptions] = useState<any[]>([]);
     const [links, setLinks] = useState<any[]>([]);
     const [profilePhoto, setProfilePhoto] = useState<string>('');
 
     useEffect(() => {
-        setDescriptions(JSON.parse(data?.description));
-        setLinks(data?.links);
-        setProfilePhoto(data?.file?.path);
-    }, [data]);
+        useApi.axiosRequestAuth('GET', '/developer', null, session?.user?.accessToken).then((res: any) => {
+            setDescriptions(JSON.parse(data?.description));
+            setLinks(data?.links);
+            setProfilePhoto(data?.file?.path);
+        });
+    }, [data, session]);
+
+    
 
     return (
         <main className={styles.my_links} style={selectedTab === 0 ? {height: '100vh'} : {height: 'auto'}}>
