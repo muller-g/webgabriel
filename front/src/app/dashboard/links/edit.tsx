@@ -106,7 +106,7 @@ export default function LinksEdit({session}: any) {
     async function saveBtns() {
         setLoading(true)
 
-        for(let i=0; i<linkBtns.length; i++){
+        for(let i=0; i<linkBtns?.length; i++){
             let link: any = linkBtns[i];
             let formData = new FormData();
 
