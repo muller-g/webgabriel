@@ -133,7 +133,7 @@ export default function LinksEdit({session}: any) {
             formData.append('file', image);
         }
 
-        inputs.map((description: any, index: number) => {
+        inputs?.map((description: any, index: number) => {
             formData.append(`description[]`, description);
         });
 

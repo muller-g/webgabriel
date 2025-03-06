@@ -69,7 +69,7 @@ export default function ServicesEdit() {
                     <Button backgroundColor={"#b900ff"} color={"#fff"} onClick={() => setLinkBtns([...linkBtns, ''])}>+</Button>
                 </div>
                 {
-                    linkBtns.map((btn: any, index: number) => (
+                    linkBtns?.map((btn: any, index: number) => (
                         <div key={`container-${index}`}>
                             <div className={styles.file_wrapp} id={styles.wrapp_icon}>
                                 <label htmlFor={`fileIcon-${index}`}>
