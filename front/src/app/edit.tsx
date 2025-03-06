@@ -22,6 +22,7 @@ export default function PortfolioEdit({data, session}: any) {
             setLinks(data?.links);
             setProfilePhoto(data?.file?.path);
         });
+        console.log(data)
     }, [data, session]);
 
     
