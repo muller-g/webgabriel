@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import LinksEdit from "./edit";
-import { authOptions } from '../../api/auth/[...nextauth]/route';
+import { authOptions } from "@/utils/authOptions";
 
 export default async function Links() {
   const session = await getServerSession(authOptions);

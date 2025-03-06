@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 import styles from './page.module.css';
 import { getServerSession } from "next-auth";
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import DashboardPageEdit from './edit';
+import { authOptions } from '@/utils/authOptions';
 
 export default async function DashboardPage() {
     const session = await getServerSession(authOptions);
