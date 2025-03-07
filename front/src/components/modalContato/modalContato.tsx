@@ -51,6 +51,16 @@ export default function ModalContato({isOpen, onClose}: any) {
         }
     }, [name, email, phone, message])
 
+    useEffect(() => {
+        if(!isOpen){
+            setName('')
+            setEmail('')
+            setPhone('')
+            setMessage('')
+            setLoading(false)
+        }
+    }, [isOpen])
+
     return(
         <Modal isOpen={isOpen} onClose={onClose} isCentered size={'xl'}>
             <ModalOverlay  />
