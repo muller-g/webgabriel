@@ -2,9 +2,9 @@
 import useApi from "@/app/api/hook/axiosRequest";
 import { Button, Divider, Input } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import styles from "./edit.module.css";
-import { Bounce, toast } from 'react-toastify';
 import { FaRegTrashAlt } from "react-icons/fa";
+import styles from "./edit.module.css";
+import { notify, notifyErr } from "@/utils/toastify";
 
 export default function LinksEdit({session}: any) {
     const [image, setImage] = useState<any>(null);
@@ -13,29 +13,7 @@ export default function LinksEdit({session}: any) {
     const [linkBtns, setLinkBtns] = useState<any>([]);
     const [populatedData, setPopulatedData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const notify = () => toast.success('Sucesso', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-    });
-
-    const notifyErr = () => toast.error('Erro', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-    });
+    const [refresh, setRefresh] = useState<any>();
 
     useEffect(() => {
         useApi.axiosRequestAuth('GET', '/developer', null, session?.user?.accessToken).then((res: any) => {
@@ -44,19 +22,35 @@ export default function LinksEdit({session}: any) {
             setInputs(res?.response?.data?.description ? JSON.parse(res?.response?.data?.description) : []);
             setPopulatedData(res?.response?.data)
         });
-    }, [])
+    }, [refresh])
 
     function handleChangeImage(e: any){
         setImage(e.target.files[0]);
         setPreview(URL.createObjectURL(e.target.files[0]));
     }
 
-    function removeBtn(index: number) {
-        let arr = linkBtns;
+    async function removeBtn(id: number, type: string) {
+        setLoading(true)
 
-        arr.splice(index, 1);
+        if(type === 'front'){
+            let arr = linkBtns;
 
-        setLinkBtns([...arr]);
+            arr.splice(id, 1);
+    
+            setLinkBtns([...arr]);
+        } else {
+            const response: any = await useApi.axiosRequestAuthFormData('DELETE', '/developer/remove-link?id=' + id, null, session?.user?.accessToken)
+        
+            if(response.response.status !== 200){
+                notifyErr();
+                return;
+            }
+
+            setRefresh(Math.random())
+        }
+
+        setLoading(false)
+        notify('Removido com sucesso');
     }
 
     function handleAddTextBtn(e: any, index: number) {
@@ -105,23 +99,25 @@ export default function LinksEdit({session}: any) {
     async function saveBtns() {
         setLoading(true)
 
-        for(let i=0; i<linkBtns?.length; i++){
-            let link: any = linkBtns[i];
-            let formData = new FormData();
-
-            if(link.title) formData.append(`title`, link.title);
-            if(link.url) formData.append(`url`, link.url);
-            if(link.file) formData.append(`file`, link.file);
-            
-            const response: any = await useApi.axiosRequestAuthFormData('POST', '/developer/create-link', formData, session?.user?.accessToken)
-            if(response.response.status !== 200){
-                notifyErr();
-                break;
+        let formData = new FormData();
+        
+        linkBtns.forEach((item: any, index: number) => {
+            if(item.file instanceof File){
+                formData.append(`links[${index}][file]`, item.file);
+                formData.append(`links[${index}][title]`, item.title);
+                formData.append(`links[${index}][url]`, item.url);
             }
+        });
+
+        const response: any = await useApi.axiosRequestAuthFormData('POST', '/developer/create-link', formData, session?.user?.accessToken)
+        
+        if(response.response.status !== 200){
+            notifyErr();
+            return;
         }
 
         setLoading(false)
-        notify();
+        notify('Salvo com sucesso');
     }
 
     async function handleSaveDeveloperInfo() {
@@ -139,7 +135,7 @@ export default function LinksEdit({session}: any) {
         await useApi.axiosRequestAuthFormData('POST', '/developer/create', formData, session?.user?.accessToken)
         .then((res: any) => {
             setLoading(false)
-            notify();
+            notify('Salvo com sucesso');
         })
     }
 
@@ -208,7 +204,7 @@ export default function LinksEdit({session}: any) {
                                 <div className={styles.image_preview}>
                                     <img src={btn?.file instanceof File ? URL.createObjectURL(btn?.file) : process.env.NEXT_PUBLIC_API_ROUTE_BACK + btn?.file?.path } alt="" />
                                 </div>
-                                <Button backgroundColor={"#b900ff"} color={"#fff"} onClick={() => removeBtn(index)}>Remover</Button>
+                                <Button backgroundColor={"#b900ff"} color={"#fff"} isLoading={loading} onClick={() => btn?.id ? removeBtn(btn?.id, 'api') : removeBtn(index, 'front')}>Remover</Button>
                             </div>
                             <div className={styles.wrapp_inputs}>
                                 <Input type="text" placeholder="Texto do botão" value={btn?.title} onChange={(e) => handleAddTextBtn(e, index)} />
@@ -218,7 +214,15 @@ export default function LinksEdit({session}: any) {
                         </div>
                     ))
                 }
-                <Button backgroundColor={"#b900ff"} style={{marginTop: '20px'}} color={"#fff"} onClick={saveBtns}>Salvar</Button>
+                <Button 
+                    backgroundColor={"#b900ff"} 
+                    style={{marginTop: '20px'}} 
+                    color={"#fff"} 
+                    onClick={saveBtns}
+                    isLoading={loading}
+                >
+                    Salvar
+                </Button>
             </div>
         </div>
     )

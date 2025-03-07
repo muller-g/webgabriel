@@ -1,16 +1,19 @@
 'use client';
 import Chip from "@/components/chip";
+import ModalContato from "@/components/modalContato/modalContato";
 import Service from "@/components/service";
 import SocialButton from "@/components/socialButton";
+import { useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaStoreAlt } from "react-icons/fa";
 import { FaGears } from "react-icons/fa6";
 import { GrConnect, GrVmMaintenance } from "react-icons/gr";
-import { MdDevices, MdWeb } from "react-icons/md";
-import styles from "./page.module.css";
+import { MdDevices, MdEmail, MdWeb } from "react-icons/md";
 import useApi from "./api/hook/axiosRequest";
+import styles from "./page.module.css";
 
 export default function PortfolioEdit({data, session}: any) {
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const [selectedTab, setSelectedTab] = useState(0);
     const [descriptions, setDescriptions] = useState<any[]>([]);
     const [links, setLinks] = useState<any[]>([]);
@@ -24,13 +27,11 @@ export default function PortfolioEdit({data, session}: any) {
         });
     }, [data, session]);
 
-    
-
     return (
         <main className={styles.my_links} style={selectedTab === 0 ? {height: '100vh'} : {height: 'auto'}}>
            <div className={styles.my_links_container}>
                 <div className={styles.fixed_section}>
-                    <div className={styles.title_img} style={{backgroundImage: `url("https://api.gabrielmullerdev.com.br${profilePhoto}")`}}></div>
+                    <div className={styles.title_img} style={{backgroundImage: `url("${process.env.NEXT_PUBLIC_API_ROUTE_BACK + profilePhoto}")`}}></div>
                     <h1 className={styles.instagram_title}>@_muller.dev</h1>
                     {
                         descriptions?.map((description: any, index: number) => (
@@ -41,6 +42,9 @@ export default function PortfolioEdit({data, session}: any) {
                         <div className={`${styles.tab_info} ${selectedTab === 0 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(0)}>LINKS</div>
                         <div className={`${styles.tab_info} ${selectedTab === 1 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(1)}>SERVIÇOS</div>
                         <div className={`${styles.tab_info} ${selectedTab === 2 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(2)}>SKILLS</div>
+                        <div className={`${styles.email_button}`} onClick={onOpen}>
+                            <button><MdEmail /> ENVIAR E-MAIL</button>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.content_tab}>
@@ -203,6 +207,7 @@ export default function PortfolioEdit({data, session}: any) {
                 }
                 </div>
             </div>
+            <ModalContato isOpen={isOpen} onClose={onClose}/>
         </main>
     );
 }

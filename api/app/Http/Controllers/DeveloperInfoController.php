@@ -38,27 +38,36 @@ class DeveloperInfoController extends Controller
     {
         try {
             $data = $request->all();
-            Link::truncate();
             $developerInfo = DeveloperInfo::where('id', 1)->first();
+            Link::truncate();
 
-            $createdLink = Link::create([
-                'url' => $data['url'],
-                'title' => $data['title'],
-                'developer_info_id' => $developerInfo->id,
-            ]);
+            foreach ($data["links"] as $link) {
+                $createdLink = Link::create([
+                    'url' => $link['url'],
+                    'title' => $link['title'],
+                    'developer_info_id' => $developerInfo->id,
+                ]);
 
-            if($request->hasFile('file')) {
-                $file = $request->file('file');
-                $fileId = uploadFile($file);
-                $createdLink->file_id = $fileId;
+                if($link['file']) {
+                    $file = $link['file'];
+                    $fileId = uploadFile($file);
+                    $createdLink->file_id = $fileId;
+                }
+
+                $createdLink->update();
             }
-
-            $createdLink->update();
 
             return response()->json([ 'message' => 'Links atualizados com sucesso!' ]);
         } catch (\Exception $e) {
             return response()->json([ 'message' => $e->getMessage() ]);
         }
+    }
+
+    public function removeLink(Request $request)
+    {
+        Link::where('id', $request->get('id'))->delete();
+
+        return response()->json(["message" => "Link removid com sucesso!"]);
     }
 
     public function index()
