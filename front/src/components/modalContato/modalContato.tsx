@@ -35,6 +35,7 @@ export default function ModalContato({isOpen, onClose}: any) {
 
        if(response.error){
             notifyErr();
+            setLoading(false);
             return;
         }
 
