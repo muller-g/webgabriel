@@ -1,7 +1,6 @@
 'use client'
 
 import useApi from '@/app/api/hook/axiosRequest';
-import { signOut } from "next-auth/react";
 import {
   Avatar,
   Box,
@@ -23,6 +22,7 @@ import {
   useDisclosure,
   VStack
 } from '@chakra-ui/react';
+import { signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import { IconType } from 'react-icons';
 import {
@@ -32,6 +32,7 @@ import {
   FiHome,
   FiMenu
 } from 'react-icons/fi';
+import { MdEmail } from "react-icons/md";
 
 interface LinkItemProps {
   name: string
@@ -54,6 +55,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Acessos', icon: FiHome, path: '/dashboard' },
+  { name: 'E-mails', icon: MdEmail, path: '/dashboard/mails' },
   { name: 'Links', icon: FiEdit, path: '/dashboard/links' },
   { name: 'Serviços', icon: FiEdit, path: '/dashboard/services' },
   { name: 'Skills', icon: FiEdit, path: '/dashboard/skills' },

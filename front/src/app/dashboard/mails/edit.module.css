@@ -1,0 +1,9 @@
+.table_emails tbody tr td,
+.table_emails thead tr th {
+    color: #fff;
+}
+
+.button_mail_answer {
+    cursor: pointer;
+    width: max-content;
+}

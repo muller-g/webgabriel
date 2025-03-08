@@ -26,4 +26,8 @@ Route::prefix('developer')->group(function(){
     Route::post('/create-link', [DeveloperInfoController::class, 'storeLinks']);
     Route::delete('/remove-link', [DeveloperInfoController::class, 'removeLink']);
     Route::get('/', [DeveloperInfoController::class, 'index']);
+    Route::get('/emails', [EmailController::class, 'index']);
+    Route::get('/emails/{id}', [EmailController::class, 'get']);
+    Route::post('/send-answer-email', [EmailController::class, 'sendAnswerEmail']);
+
 });
