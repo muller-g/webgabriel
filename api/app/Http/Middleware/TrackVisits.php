@@ -19,11 +19,6 @@ class TrackVisits
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Ignorar rotas de API ou administrativas
-        if ($request->is('api/*') || $request->is('admin/*')) {
-            return $next($request);
-        }
-
         $agent = new Agent();
         $ip = $request->ip();
 
