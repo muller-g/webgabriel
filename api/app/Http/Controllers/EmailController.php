@@ -40,7 +40,7 @@ class EmailController extends Controller
 
     public function get(String $id)
     {
-        $email = Email::where('id', $id)->first();
+        $email = Email::with('reply')->where('id', $id)->first();
 
         return response()->json($email);
     }
@@ -64,6 +64,7 @@ class EmailController extends Controller
             'phone' => $validated['phone'],
             'message' => $validated['message'],
             'type' => 'system',
+            'reply_id' => $validated['id'],
         ]);
 
         Email::where('id', $validated['id'])->update([

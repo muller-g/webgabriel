@@ -15,19 +15,18 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/logout', [LoginController::class, 'logout']);
     });
 
+    Route::prefix('developer')->group(function(){
+        Route::post('/create', [DeveloperInfoController::class, 'store']);
+        Route::post('/create-link', [DeveloperInfoController::class, 'storeLinks']);
+        Route::delete('/remove-link', [DeveloperInfoController::class, 'removeLink']);
+        Route::get('/emails', [EmailController::class, 'index']);
+        Route::get('/emails/{id}', [EmailController::class, 'get']);
+        Route::post('/send-answer-email', [EmailController::class, 'sendAnswerEmail']);
+    });
+
+    Route::get('/', [UserController::class, 'index']);
 });
 
-Route::get('/', [UserController::class, 'index']);
-
+Route::get('/developer', [DeveloperInfoController::class, 'index']);
 Route::post('/send-email', [EmailController::class, 'send']);
 
-Route::prefix('developer')->group(function(){
-    Route::post('/create', [DeveloperInfoController::class, 'store']);
-    Route::post('/create-link', [DeveloperInfoController::class, 'storeLinks']);
-    Route::delete('/remove-link', [DeveloperInfoController::class, 'removeLink']);
-    Route::get('/', [DeveloperInfoController::class, 'index']);
-    Route::get('/emails', [EmailController::class, 'index']);
-    Route::get('/emails/{id}', [EmailController::class, 'get']);
-    Route::post('/send-answer-email', [EmailController::class, 'sendAnswerEmail']);
-
-});

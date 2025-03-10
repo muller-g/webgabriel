@@ -45,7 +45,7 @@ export default function MailsEdit({session}: any) {
                                     <Td className={styles.td_answered}>
                                         {
                                             email?.answered ? 
-                                                <div className={styles.button_mail_answer}>
+                                                <div className={styles.button_mail_answer} onClick={() =>  router.push('/dashboard/mails/reply/' + email?.id)}>
                                                     <img src={rightPng.src} style={{width: '45px'}} alt="" /> 
                                                 </div>
                                             : 
