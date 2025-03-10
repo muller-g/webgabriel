@@ -22,6 +22,10 @@ class TrackVisits
         $agent = new Agent();
         $ip = $request->ip();
 
+        if($ip === '127.0.0.1' || $ip === '::1' || $ip === 'localhost') {
+            return $next($request);
+        }
+
         // Buscar localização (usando o pacote stevebauman/location)
         $position = Location::get($ip);
 
