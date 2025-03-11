@@ -20,14 +20,19 @@ export default function PortfolioEdit({data, session}: any) {
     const [selectedTab, setSelectedTab] = useState(0);
     const [descriptions, setDescriptions] = useState<any[]>([]);
     const [links, setLinks] = useState<any[]>([]);
+    const [avaliations, setAvaliations] = useState<any[]>([]);
     const [profilePhoto, setProfilePhoto] = useState<string>('');
     const { width } = useScreenWidth();
 
     useEffect(() => {
-        useApi.axiosRequestAuth('GET', '/developer', null, session?.user?.accessToken).then((res: any) => {
+        useApi.axiosRequest('GET', '/developer', null).then((res: any) => {
             setDescriptions(res?.response?.data?.description ? JSON.parse(res?.response?.data?.description) : []);
             setLinks(res?.response?.data?.links);
             setProfilePhoto(res?.response?.data?.file?.path);
+        });
+
+        useApi.axiosRequest('GET', '/avaliations', null).then((res: any) => {
+            setAvaliations(res?.response?.data);
         });
     }, [data, session]);
 
@@ -242,17 +247,11 @@ export default function PortfolioEdit({data, session}: any) {
                     selectedTab === 3 &&
                     <div className={styles.redirect_links}>
                         <div className={styles.redirect_links_scroll}>
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
-                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            {
+                                avaliations?.map((avaliation: any) => (
+                                    <Avaliation name={avaliation?.name} message={avaliation?.message} />
+                                ))
+                            }
                         </div>
                     </div>
                 }

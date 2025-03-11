@@ -8,7 +8,7 @@
     display: flex;
     gap: 16px;
     align-items: center;
-    height: auto;
+    height: max-content;
     cursor: pointer;
     background-color: white;
     color: black;
@@ -33,20 +33,4 @@
     color: black;
 }
 
-@media (max-width: 485px) {
-    .avaliation {
-        height: 350px;
-    }
-}
 
-@media (max-width: 396px) {
-    .avaliation {
-        height: 120px;
-    }
-}
-
-@media (max-width: 342px) {
-    .avaliation {
-        height: 140px;
-    }
-}

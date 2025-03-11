@@ -143,6 +143,7 @@
 
 .redirect_links_scroll {
     height: 100vh;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 30px;
