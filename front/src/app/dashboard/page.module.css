@@ -4,8 +4,25 @@
 }
 
 .stats_content {
+    display: grid;
+    grid-template-columns: 1fr 20%;
+    gap: 10px;
+    height: 350px;
+    margin-bottom: 20px;
+}
+
+.regions_content {
     display: flex;
     gap: 10px;
+}
+
+.region_stat {
+    background-color: #030018;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .stat {
@@ -13,6 +30,13 @@
     width: 100%;
     border-radius: 8px;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat_container {
+    width: 100%;
 }
 
 .stat span {

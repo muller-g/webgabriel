@@ -13,7 +13,7 @@ export default async function DashboardPage() {
 
     return (
       <main className={styles.main}>
-        <DashboardPageEdit />
+        <DashboardPageEdit session={session}/>
       </main>
     );
 }

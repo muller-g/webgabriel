@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DeveloperInfoController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->prefix('auth')->group(function(){
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/', [UserController::class, 'index']);
 });
 
+Route::get('/developer/visits', [VisitsController::class, 'index']);
 Route::get('/developer', [DeveloperInfoController::class, 'index']);
 Route::post('/send-email', [EmailController::class, 'send']);
 
