@@ -9,7 +9,7 @@
 }
 
 .my_links .my_links_container {
-    max-width: 500px;
+    max-width: max-content;
     width: 100%;
     height: 100%;
     display: flex;
@@ -111,7 +111,7 @@
 }
 
 .tab_list {
-    width: 400px;
+    width: max-content;
     margin-top: 40px;
     display: flex;
     gap: 8px;
@@ -141,6 +141,34 @@
     cursor: pointer;
 }
 
+.redirect_links_scroll {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.redirect_links_scroll::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.redirect_links_scroll::-webkit-scrollbar-track {
+    background: #d28eec;
+    border-radius: 10px;
+}
+
+.redirect_links_scroll::-webkit-scrollbar-thumb {
+    background: #cf4aff;
+    border-radius: 10px;
+}
+
+.redirect_links_scroll::-webkit-scrollbar-thumb:hover {
+    background: #8e44ad;
+}
+
 @media (max-width: 800px) {
     .my_links .my_links_container {
         overflow: auto;
@@ -151,4 +179,18 @@
     .content_tab {
         padding: 0 10px;
     }
+}
+
+.tab_list_mobile {
+    margin-top: 20px;
+}
+
+.hamburger_btn {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
 }

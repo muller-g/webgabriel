@@ -1,0 +1,52 @@
+.avaliation {
+    max-width: 600px;
+    width: 100%;
+    transition: 0.3s;
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    height: auto;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    box-shadow: 7px 12px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.avaliation_content h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.avaliation:hover {
+    transition: 0.3s;
+    background-color: white;
+}
+
+.avaliation:hover h1,
+.avaliation:hover p,
+.avaliation:hover svg {
+    transition: 0.3s;
+    color: black;
+}
+
+@media (max-width: 485px) {
+    .avaliation {
+        height: 350px;
+    }
+}
+
+@media (max-width: 396px) {
+    .avaliation {
+        height: 120px;
+    }
+}
+
+@media (max-width: 342px) {
+    .avaliation {
+        height: 140px;
+    }
+}

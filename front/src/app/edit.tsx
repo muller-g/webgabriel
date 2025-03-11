@@ -3,14 +3,17 @@ import Chip from "@/components/chip";
 import ModalContato from "@/components/modalContato/modalContato";
 import Service from "@/components/service";
 import SocialButton from "@/components/socialButton";
-import { useDisclosure } from "@chakra-ui/react";
+import useScreenWidth from "@/utils/useScreenWidth";
+import { Menu, MenuButton, MenuItem, MenuList, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaStoreAlt } from "react-icons/fa";
 import { FaGears } from "react-icons/fa6";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { GrConnect, GrVmMaintenance } from "react-icons/gr";
 import { MdDevices, MdEmail, MdWeb } from "react-icons/md";
 import useApi from "./api/hook/axiosRequest";
 import styles from "./page.module.css";
+import Avaliation from "@/components/avaliation";
 
 export default function PortfolioEdit({data, session}: any) {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -18,6 +21,7 @@ export default function PortfolioEdit({data, session}: any) {
     const [descriptions, setDescriptions] = useState<any[]>([]);
     const [links, setLinks] = useState<any[]>([]);
     const [profilePhoto, setProfilePhoto] = useState<string>('');
+    const { width } = useScreenWidth();
 
     useEffect(() => {
         useApi.axiosRequestAuth('GET', '/developer', null, session?.user?.accessToken).then((res: any) => {
@@ -38,14 +42,43 @@ export default function PortfolioEdit({data, session}: any) {
                             <p key={index} className={styles.description}>{description}</p>
                         ))
                     }
-                    <div className={styles.tab_list}>
-                        <div className={`${styles.tab_info} ${selectedTab === 0 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(0)}>LINKS</div>
-                        <div className={`${styles.tab_info} ${selectedTab === 1 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(1)}>SERVIÇOS</div>
-                        <div className={`${styles.tab_info} ${selectedTab === 2 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(2)}>SKILLS</div>
-                        <div className={`${styles.email_button}`} onClick={onOpen}>
-                            <button><MdEmail /> ENVIAR E-MAIL</button>
+                    {
+                        width >= 500 ?
+                        <div className={styles.tab_list}>
+                            <div className={`${styles.tab_info} ${selectedTab === 0 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(0)}>LINKS</div>
+                            <div className={`${styles.tab_info} ${selectedTab === 1 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(1)}>SERVIÇOS</div>
+                            <div className={`${styles.tab_info} ${selectedTab === 2 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(2)}>SKILLS</div>
+                            <div className={`${styles.tab_info} ${selectedTab === 3 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(3)}>AVALIAÇÕES</div>
+                            <div className={`${styles.email_button}`} onClick={onOpen}>
+                                <button><MdEmail /> ENVIAR E-MAIL</button>
+                            </div>
                         </div>
-                    </div>
+                        :
+                        <div className={styles.tab_list_mobile}>
+                            <Menu>
+                                <MenuButton className={styles.hamburger_btn}><GiHamburgerMenu size={22}/></MenuButton>
+                                <MenuList>
+                                    <MenuItem as='a' href='#' key={'menu-item-mob-1'}>
+                                        <div className={`${styles.tab_info} ${selectedTab === 0 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(0)}>LINKS</div>
+                                    </MenuItem>
+                                    <MenuItem as='a' href='#' key={'menu-item-mob-2'}>
+                                        <div className={`${styles.tab_info} ${selectedTab === 1 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(1)}>SERVIÇOS</div>
+                                    </MenuItem>
+                                    <MenuItem as='a' href='#' key={'menu-item-mob-3'}>
+                                        <div className={`${styles.tab_info} ${selectedTab === 2 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(2)}>SKILLS</div>
+                                    </MenuItem>
+                                    <MenuItem as='a' href='#' key={'menu-item-mob-4'}>
+                                        <div className={`${styles.tab_info} ${selectedTab === 3 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(3)}>AVALIAÇÕES</div>
+                                    </MenuItem>
+                                    <MenuItem as='a' href='#' key={'menu-item-mob-5'}>
+                                        <div className={`${styles.email_button}`} onClick={onOpen}>
+                                            <button><MdEmail /> ENVIAR E-MAIL</button>
+                                        </div>
+                                    </MenuItem>
+                                </MenuList>
+                            </Menu>
+                        </div>   
+                    }
                 </div>
                 <div className={styles.content_tab}>
                 {
@@ -53,7 +86,7 @@ export default function PortfolioEdit({data, session}: any) {
                     <div className={styles.redirect_links}>
                         {
                             links?.map((link: any, index: number) => (
-                                <SocialButton text={link?.title} url={link?.url} icon={link?.file?.path} />
+                                <SocialButton text={link?.title} url={link?.url} icon={link?.file?.path} index={index}/>
                             ))
                         }
                     </div>
@@ -202,6 +235,24 @@ export default function PortfolioEdit({data, session}: any) {
                                 img="https://www.svgrepo.com/show/354202/postman-icon.svg"
                                 text="Postman"
                             />
+                        </div>
+                    </div>
+                }
+                {
+                    selectedTab === 3 &&
+                    <div className={styles.redirect_links}>
+                        <div className={styles.redirect_links_scroll}>
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
+                            <Avaliation name="Gabriel Müller" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at vestibulum ante, sed eleifend ipsum. Aenean tempus eros in dolor pharetra, sodales sodales dui fermentum. Morbi ornare massa nec lacus rhoncus, id ornare quam condimentum. Vestibulum eu dui a quam congue facilisis. Suspendisse tempus, orci quis dignissim porttitor," />
                         </div>
                     </div>
                 }
