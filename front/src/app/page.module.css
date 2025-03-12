@@ -195,3 +195,16 @@
     align-items: center;
     width: max-content;
 }
+
+.avaliation_btn {
+    color: #fff;
+    text-decoration-color: #b900ff;
+    transition: .3s;
+    text-underline-offset: 5px;
+}
+
+.avaliation_btn:hover {
+    text-decoration: underline;
+    transition: .3s;
+    text-decoration-color: #b900ff;
+}

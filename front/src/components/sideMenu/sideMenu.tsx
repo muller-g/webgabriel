@@ -33,6 +33,7 @@ import {
   FiMenu
 } from 'react-icons/fi';
 import { MdEmail } from "react-icons/md";
+import { MdOutlineRateReview } from "react-icons/md";
 
 interface LinkItemProps {
   name: string
@@ -55,6 +56,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Acessos', icon: FiHome, path: '/dashboard' },
+  { name: 'Avaliações', icon: MdOutlineRateReview, path: '/dashboard/avaliations' },
   { name: 'E-mails', icon: MdEmail, path: '/dashboard/mails' },
   { name: 'Links', icon: FiEdit, path: '/dashboard/links' },
   { name: 'Serviços', icon: FiEdit, path: '/dashboard/services' },

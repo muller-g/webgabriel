@@ -55,6 +55,10 @@ class VisitsController extends Controller
             ];
         }
 
+        usort($visitCounts, function ($a, $b) {
+            return strtotime($a['day']) <=> strtotime($b['day']);
+        });
+
         return response()->json([
             'visits' => $visitCounts,
             'emails' => $emails,

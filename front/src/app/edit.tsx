@@ -14,15 +14,27 @@ import { MdDevices, MdEmail, MdWeb } from "react-icons/md";
 import useApi from "./api/hook/axiosRequest";
 import styles from "./page.module.css";
 import Avaliation from "@/components/avaliation";
+import ModalAvaliation from "@/components/modalAvaliation/modalAvaliation";
 
 export default function PortfolioEdit({data, session}: any) {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+
     const [selectedTab, setSelectedTab] = useState(0);
     const [descriptions, setDescriptions] = useState<any[]>([]);
     const [links, setLinks] = useState<any[]>([]);
     const [avaliations, setAvaliations] = useState<any[]>([]);
     const [profilePhoto, setProfilePhoto] = useState<string>('');
     const { width } = useScreenWidth();
+    const {
+        isOpen: isContatoOpen,
+        onOpen: onContatoOpen,
+        onClose: onContatoClose,
+    } = useDisclosure();
+    
+    const {
+        isOpen: isAvaliationOpen,
+        onOpen: onAvaliationOpen,
+        onClose: onAvaliationClose,
+    } = useDisclosure();
 
     useEffect(() => {
         useApi.axiosRequest('GET', '/developer', null).then((res: any) => {
@@ -35,6 +47,10 @@ export default function PortfolioEdit({data, session}: any) {
             setAvaliations(res?.response?.data);
         });
     }, [data, session]);
+
+    async function handleOpenCreateAvaliation() {
+
+    }
 
     return (
         <main className={styles.my_links} style={selectedTab === 0 ? {height: '100vh'} : {height: 'auto'}}>
@@ -54,7 +70,7 @@ export default function PortfolioEdit({data, session}: any) {
                             <div className={`${styles.tab_info} ${selectedTab === 1 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(1)}>SERVIÇOS</div>
                             <div className={`${styles.tab_info} ${selectedTab === 2 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(2)}>SKILLS</div>
                             <div className={`${styles.tab_info} ${selectedTab === 3 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(3)}>AVALIAÇÕES</div>
-                            <div className={`${styles.email_button}`} onClick={onOpen}>
+                            <div className={`${styles.email_button}`} onClick={onContatoOpen}>
                                 <button><MdEmail /> ENVIAR E-MAIL</button>
                             </div>
                         </div>
@@ -76,7 +92,7 @@ export default function PortfolioEdit({data, session}: any) {
                                         <div className={`${styles.tab_info} ${selectedTab === 3 ? styles.selected_tab : ''}`} onClick={() => setSelectedTab(3)}>AVALIAÇÕES</div>
                                     </MenuItem>
                                     <MenuItem as='a' href='#' key={'menu-item-mob-5'}>
-                                        <div className={`${styles.email_button}`} onClick={onOpen}>
+                                        <div className={`${styles.email_button}`} onClick={onContatoOpen}>
                                             <button><MdEmail /> ENVIAR E-MAIL</button>
                                         </div>
                                     </MenuItem>
@@ -246,6 +262,7 @@ export default function PortfolioEdit({data, session}: any) {
                 {
                     selectedTab === 3 &&
                     <div className={styles.redirect_links}>
+                        <a href="#" onClick={onAvaliationOpen} className={styles.avaliation_btn}>Deixar uma avaliação +</a>
                         <div className={styles.redirect_links_scroll}>
                             {
                                 avaliations?.map((avaliation: any) => (
@@ -257,7 +274,8 @@ export default function PortfolioEdit({data, session}: any) {
                 }
                 </div>
             </div>
-            <ModalContato isOpen={isOpen} onClose={onClose}/>
+            <ModalContato isOpen={isContatoOpen} onClose={onContatoClose}/>
+            <ModalAvaliation isOpen={isAvaliationOpen} onClose={onAvaliationClose}/>
         </main>
     );
 }

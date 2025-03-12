@@ -24,13 +24,16 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('/emails', [EmailController::class, 'index']);
         Route::get('/emails/{id}', [EmailController::class, 'get']);
         Route::post('/send-answer-email', [EmailController::class, 'sendAnswerEmail']);
+        Route::get('/avaliations/accept', [AvaliationsController::class, 'toAccept']);
+        Route::post('/avaliations-approve/{id}', [AvaliationsController::class, 'approveOrDecline']);
     });
 
-    Route::get('/', [UserController::class, 'index']);
+    //Route::get('/', [UserController::class, 'index']);
 });
 
 Route::get('/developer/visits', [VisitsController::class, 'index']);
 Route::get('/developer', [DeveloperInfoController::class, 'index']);
 Route::get('/avaliations', [AvaliationsController::class, 'index']);
 Route::post('/send-email', [EmailController::class, 'send']);
+Route::post('/send-avaliation', [AvaliationsController::class, 'send']);
 
