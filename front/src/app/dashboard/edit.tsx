@@ -43,29 +43,35 @@ export default function DashboardPageEdit({session}: any) {
                     <div className={styles.region_stat}>
                         <h1>País</h1>
                         <Divider style={{marginBottom: '15px'}}/>
-                        {
-                            userAccess?.country?.map((country: any) => (
-                                <span>{country}</span>
-                            ))
-                        }
+                        <div className={styles.container_scroll}>
+                            {
+                                userAccess?.country?.map((country: any) => (
+                                    <span>{country}</span>
+                                ))
+                            }
+                        </div>
                     </div>
                     <div className={styles.region_stat}>
                         <h1>Estado</h1>
                         <Divider style={{marginBottom: '15px'}}/>
-                        {
-                            userAccess?.region?.map((region: any) => (
-                                <span>{region}</span>
-                            ))
-                        }
+                        <div className={styles.container_scroll}>
+                            {
+                                userAccess?.region?.map((region: any) => (
+                                    <span>{region}</span>
+                                ))
+                            }
+                        </div>
                     </div>
                     <div className={styles.region_stat}>
                         <h1>Cidade</h1>
                         <Divider style={{marginBottom: '15px'}}/>
-                        {
-                            userAccess?.city?.map((city: any) => (
-                                <span>{city}</span>
-                            ))
-                        }
+                        <div className={styles.container_scroll}>
+                            {
+                                userAccess?.city?.map((city: any) => (
+                                    <span>{city}</span>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

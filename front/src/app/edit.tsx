@@ -48,10 +48,6 @@ export default function PortfolioEdit({data, session}: any) {
         });
     }, [data, session]);
 
-    async function handleOpenCreateAvaliation() {
-
-    }
-
     return (
         <main className={styles.my_links} style={selectedTab === 0 ? {height: '100vh'} : {height: 'auto'}}>
            <div className={styles.my_links_container}>

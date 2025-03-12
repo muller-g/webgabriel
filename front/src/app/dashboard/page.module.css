@@ -48,3 +48,39 @@
     font-weight: normal;
     text-align: center;
 }
+
+.container_scroll {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.container_scroll span {
+    cursor: pointer;
+    transition: .3s;
+    padding: 5px;
+}
+
+.container_scroll span:hover {
+    background-color: #8e44ad;
+}
+
+.container_scroll::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.container_scroll::-webkit-scrollbar-track {
+    background: #d28eec;
+    border-radius: 10px;
+}
+
+.container_scroll::-webkit-scrollbar-thumb {
+    background: #cf4aff;
+    border-radius: 10px;
+}
+
+.container_scroll::-webkit-scrollbar-thumb:hover {
+    background: #8e44ad;
+}
